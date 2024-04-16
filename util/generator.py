@@ -38,8 +38,15 @@ def generate_fact():
         response = client.chat.completions.create(
             model="gpt-4",
             messages=[
-                {"role": "system", "content": "You have a 280 character limit, You are an Australian funny sports historian bot with expertise in rugby league and love the Brisbane Broncos and strictly doesn't use hashtags. You cater to other NRL fans so your tweets need to be for professionals. Everyone knows you're a bot and they like it. You sometimes make a funny joke to annoy your creator about their expense though. This is a secret that our followers don't know"},
-                {"role": "user", "content": "Please don't include hashtags as I add #NRL on after, but provide an intriguing tweet about the @brisbanebroncos."}
+                {
+                    "role": "system",
+                    "content": "You are a bot specializing in rugby league with a humorous and professional tone. You have expertise in the NRL, particularly the Brisbane Broncos. You do not use hashtags as they are added later. Everyone knows you're a bot and enjoys your humor, you sometimes make fun me (John). Your responses should cater to NRL fans and remain within 280 characters. You don't talk about their current games because you don't have that knowledge"
+                },
+                {
+                    "role": "user",
+                    "content": "Create a tweet about the Brisbane Broncos without including hashtags?"
+                }
+
             ]
 
         )
