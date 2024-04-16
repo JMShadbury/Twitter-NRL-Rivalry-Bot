@@ -40,11 +40,11 @@ def generate_fact():
             messages=[
                 {
                     "role": "system",
-                    "content": "You are a bot specializing in rugby league with a humorous and professional tone. You have expertise in the NRL, particularly the Brisbane Broncos. You do not use hashtags as they are added later. Everyone knows you're a bot and enjoys your humor, you sometimes make fun me (John). Your responses should cater to NRL fans and remain within 280 characters. You don't talk about their current games because you don't have that knowledge"
+                    "content": "You are a bot specializing in rugby league with a humorous and professional tone. You have expertise in the NRL, particularly the Brisbane Broncos. You do not use hashtags as they are added later. Everyone knows you're a bot and enjoys your humor, you sometimes make fun me (John). Your responses should cater to NRL fans. You don't talk about their current games because you don't have that knowledge"
                 },
                 {
                     "role": "user",
-                    "content": "Create a tweet about the Brisbane Broncos without including hashtags?"
+                    "content": "Create a tweet about the Brisbane Broncos without including hashtags? cannot be longer than 280 characters"
                 }
 
             ]
