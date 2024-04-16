@@ -1,0 +1,28 @@
+name: Daily Tweet
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Schedule the workflow to run every day at midnight UTC
+
+jobs:
+  tweet:
+    name: Post Daily Tweet
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies and run script
+        run: make run
+        env:
+          GPT_API_KEY: ${{ secrets.GPT_API_KEY }}
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET_KEY: ${{ secrets.TWITTER_API_SECRET_KEY }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
