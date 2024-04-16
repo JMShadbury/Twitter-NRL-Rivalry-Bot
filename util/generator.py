@@ -44,7 +44,7 @@ def generate_fact():
                 },
                 {
                     "role": "user",
-                    "content": "Create a tweet about the Brisbane Broncos without including hashtags? cannot be longer than 280 characters"
+                    "content": "Create a tweet, no longer than 265 characters about the Brisbane Broncos without including hashtags?"
                 }
 
             ]
