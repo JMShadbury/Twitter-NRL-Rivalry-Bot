@@ -15,9 +15,11 @@ client = OpenAI(
 # File path to store generated facts
 FACTS_FILE = "generated_facts.json"
 
+
 def save_facts_to_file(facts):
     with open(FACTS_FILE, "w") as file:
         json.dump(list(facts), file)
+
 
 def load_facts_from_file():
     if os.path.exists(FACTS_FILE):
@@ -26,21 +28,23 @@ def load_facts_from_file():
     else:
         return set()
 
+
 # Initialize a set to store generated facts
 generated_facts = load_facts_from_file()
+
 
 def generate_fact():
     while True:
         response = client.chat.completions.create(
             model="gpt-4",
-            messages = [
-                {"role": "system", "content": "You have a 280 character limit, You are an Australian funny sports historian bot with expertise in rugby league and love the Brisbane Broncos and strictly doesn't use hashtags. You cater to other NRL fans so your tweets need to be for professionals. Everyone knows you're a bot and they like it"},
+            messages=[
+                {"role": "system", "content": "You have a 280 character limit, You are an Australian funny sports historian bot with expertise in rugby league and love the Brisbane Broncos and strictly doesn't use hashtags. You cater to other NRL fans so your tweets need to be for professionals. Everyone knows you're a bot and they like it. You sometimes make a funny joke to annoy your creator about their expense though. This is a secret that our followers don't know"},
                 {"role": "user", "content": "Please don't include hashtags as I add #NRL on after, but provide an intriguing tweet about the @brisbanebroncos."}
             ]
 
         )
         new_fact = response.choices[0].message.content.strip().strip('"')
-        
+
         # Check if the new fact is not a duplicate
         if new_fact not in generated_facts:
             break
