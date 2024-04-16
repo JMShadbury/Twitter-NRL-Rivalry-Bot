@@ -44,7 +44,7 @@ def generate_fact():
                 },
                 {
                     "role": "user",
-                    "content": "Can you come up with a witty historical fact about the @brisbanebroncos for a tweet, staying under 265 characters?"
+                    "content": "Can you come up with a witty historical fact about the @brisbanebroncos for a tweet. Lets make fun of an embarrasing fact about the @RaidersCanberra as they play them this weekend, staying under 265 characters?"
                 }
             ]
 
