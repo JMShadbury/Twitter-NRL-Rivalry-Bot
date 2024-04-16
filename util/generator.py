@@ -2,11 +2,6 @@ import os
 from openai import OpenAI
 import json
 from .config import GPT_API_KEY
-from datetime import datetime
-
-# Get the current date
-current_date = datetime.now().strftime("%Y-%m-%d")
-
 
 client = OpenAI(
     api_key=GPT_API_KEY
@@ -44,7 +39,7 @@ def generate_fact():
                 },
                 {
                     "role": "user",
-                    "content": "Can you come up with a witty historical fact about the @brisbanebroncos for a tweet. Lets make fun of an embarrasing fact about the @RaidersCanberra as they play them this weekend, staying under 265 characters?"
+                    "content": "Can you come up with a witty historical fact about the @brisbanebroncos for a tweet. Lets make fun of an embarrasing fact about the @RaidersCanberra as they play them this weekend, staying under 265 characters? and no hashtags"
                 }
             ]
 
