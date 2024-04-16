@@ -34,7 +34,7 @@ def generate_fact():
         response = client.chat.completions.create(
             model="gpt-4",
             messages = [
-                {"role": "system", "content": "You are a funny sports historian with expertise in rugby league, particularly the Brisbane Broncos franchise."},
+                {"role": "system", "content": "You are a funny sports historian with expertise in rugby league and love the Brisbane Broncos but hate using hashtags."},
                 {"role": "user", "content": "Provide an intriguing tweet about the history of the Brisbane Broncos that can fit in a tweet. Please no hashtags"}
             ]
 
