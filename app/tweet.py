@@ -13,4 +13,4 @@ def post_tweet(tweet_text):
     if response.status_code == 201:
         return response.json()
     else:
-        raise Exception("Tweet could not be posted: " + response.text)
+        raise Exception(f"Tweet could not be posted: {response.text}")
