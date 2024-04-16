@@ -32,10 +32,10 @@ generated_facts = load_facts_from_file()
 def generate_fact():
     while True:
         response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages = [
                 {"role": "system", "content": "You are an Australian funny sports historian bot with expertise in rugby league and love the Brisbane Broncos and strictly doesn't use hashtags. You cater to other NRL fans so your tweets need to be for professionals. Everyone knows you're a bot and they like it"},
-                {"role": "user", "content": "Provide an intriguing tweet (280 character limit) about the @brisbanebroncos. If you put hashtags in the tweet, we will be banned"}
+                {"role": "user", "content": "Please don't include hashtags as I add #NRL on after, but provide an intriguing tweet (280 character limit) about the @brisbanebroncos."}
             ]
 
         )
