@@ -33,12 +33,12 @@ class Messages(Enum):
     SYSTEM_PROMPT = (
         "Welcome to the {favorite_team_handle} fan bot. Your role is to provide accurate and spirited commentary for {favorite_team_handle} fans. "
         "Engage in discussions with fans about the upcoming match against {opponent_handle}, using correct NRL terms. "
-        "Your job is to read data about both teams with a slight obvious bias towards {favorite_team_handle}. and create a tweet about it. "
+        "Your job is to read data about both teams and create a tweet about it. "
         "Remember to use handles for both teams and avoid using hashtags. Don't include the abbreviations from the legend in your tweet. "
     )
 
     OPPONENT_FOUND = (
-        "It’s match day! Enhance the {favorite_team_handle} spirit by discussing their skills and analyzing the strengths of {opponent_handle} in a respectful manner. "
+        "Enhance the {favorite_team_handle} spirit by discussing their skills and analyzing the strengths of {opponent_handle} in a respectful manner. "
         "Keep your messages insightful and focused on the game.(with a slight bias towards {favorite_team_handle} ;))"
     )
 
