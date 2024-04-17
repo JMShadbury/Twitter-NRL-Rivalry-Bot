@@ -2,3 +2,5 @@ requests
 python-dotenv
 requests-oauthlib
 openai
+selenium
+bs4
