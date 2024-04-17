@@ -38,22 +38,12 @@ class WebScraper:
                 "away_position": away_team_info.find("p", class_="match-team__position").get_text(strip=True)
             }
             match_info.append(game_details)
-        print(match_info)
         return match_info
 
-    def get_opponent(self, matches):
-        favorite_team = Team.FAVORITE_TEAM.value
-        for match in matches:
-            if favorite_team in match['home_team']:
-                return {
-                    "date": match["date"],
-                    "opponent_team": match["away_team"],
-                    "opponent_position": match["away_position"]
-                }
-            elif favorite_team in match['away_team']:
-                return {
-                    "date": match["date"],
-                    "opponent_team": match["home_team"],
-                    "opponent_position": match["home_position"]
-                }
+    def get_opponent(self, team_data):
+        favorite_team = Team.FAVORITE_TEAM.value.lower()
+        for match in team_data:
+            if favorite_team in match['home_team'].lower() or favorite_team in match['away_team'].lower():
+                opponent = match['away_team'] if favorite_team in match['home_team'].lower() else match['home_team']
+                return {'opponent_team': opponent, 'date': match['date']}
         return None

@@ -9,8 +9,8 @@ class TwitterBot:
     def run(self):
         fact = self.fact_generator.generate_fact()
         print(fact)
-        # response = self.tweet_manager.post_tweet(f"{fact} #Automated - 🤖")
-        # print("Tweet Response:", response)
+        response = self.tweet_manager.post_tweet(f"{fact} #Automated - 🤖")
+        print("Tweet Response:", response)
 
 if __name__ == "__main__":
     bot = TwitterBot()
