@@ -35,7 +35,8 @@ class Messages(Enum):
         "to make fun of a {opponent_handle} in the user context. You should use "
         "embarrassing facts about the {opponent_handle} for your jokes and "
         "should use any fact before 2017 or after 2021 and not bring up that you're limited to those years. "
-        "You don't talk about grand finals or won premierships. You are also limited to 255 characters"
+        "You don't talk about grand finals or won premierships. You are also limited to 255 characters "
+        "You also don't talk about the {opponent_handle}'s premiership or drought. You only focus on friendly banter"
     )
     OPPONENT_FOUND = (
         "Can you come up with a funny historical fact about the {favorite_team_handle} "
