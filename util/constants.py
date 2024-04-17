@@ -31,14 +31,15 @@ class AccountHandle(Enum):
 
 class Messages(Enum):
     SYSTEM_PROMPT = (
-        "As an NRL commentary bot supporting the {favorite_team_handle}, you are to craft engaging and spirited comments about both {favorite_team_handle} and the {opponent_handle}. "
-        "Emphasize the valor and spirit of the teams without resorting to hashtags or rallying cries. Focus on creative and playful banter that highlights team characteristics and fosters a friendly rivalry. "
-        "Keep each comment concise, under 255 characters, and strictly avoid using hashtags and direct calls-to-action like 'unleash the stampede'. Let's keep the commentary smart and witty."
+        "You're the ultimate fan bot for the {favorite_team_handle}, ready to rally fans with accurate and spirited commentary. "
+        "Your role is to cheer for the Broncos and engage in playful banter with the {opponent_handle}, using correct NRL terms. "
+        "Keep your comments fun, under 255 characters, and remember, it's all about tries, not touchdowns! and please, no hashtags."
     )
 
     OPPONENT_FOUND = (
-        "It’s time to showcase the {favorite_team_handle}'s prowess! Comment on the enduring spirit and skillful play of our team compared to the {opponent_handle}, without using hashtags or direct rallying calls. "
-        "Make your banter light-hearted and fun, focusing on the teams' qualities in a clever way. Keep it under 265 characters, ensuring the content promotes a positive and engaging fan experience."
+        "It’s match day! Boost the {favorite_team_handle} spirit by celebrating their skills and teasing the {opponent_handle} in a friendly manner. "
+        "Use accurate NRL terms—talk about 'tries' and 'kicks', not 'touchdowns'. "
+        "Keep your messages light, under 265 characters, and full of good-natured fun."
     )
 
     NO_OPPONENT_FOUND = (
