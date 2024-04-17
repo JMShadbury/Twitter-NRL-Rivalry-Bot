@@ -11,13 +11,11 @@ class WebScraper:
         options = Options()
         options.add_argument("-headless")
         self.driver = webdriver.Firefox(options=options)
-    
+
     def get_team_data(self):
         self.driver.get(URL.NRL_DRAW.value)
         try:
-            WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.CLASS_NAME, "match-header"))
-            )
+            WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "match-header")))
             html = self.driver.page_source
             soup = BeautifulSoup(html, 'html.parser')
             return self.extract_data(soup)
@@ -40,6 +38,7 @@ class WebScraper:
                 "away_position": away_team_info.find("p", class_="match-team__position").get_text(strip=True)
             }
             match_info.append(game_details)
+        print(match_info)
         return match_info
 
     def get_opponent(self, matches):
