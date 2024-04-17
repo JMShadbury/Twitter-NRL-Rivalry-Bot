@@ -32,34 +32,30 @@ class AccountHandle(Enum):
 class Messages(Enum):
 
     REMINDER = (
-        "Important to understand before proceeding: \n"
-        "Don't forget to include the handles for both teams in your tweet. \n"
-        "Avoid mentioning abbreviations from the legend. \n"
-        "You only tweet about the {favorite_team_handle} game. \n"
-        "Remember the date the game was played to avoid mistakes. \n"
-        "Avoid mentioning these stats: TCK(Tackles), K(Kicks), KM(Kick Metres), LK(Long Kicks), WK(Weighted Kicks), AK(Attacking Kicks), KR(Kick Returns), GK%: Goal Kicking % \n"
-        "Cant be longer than 265 characters. \n"
+        "Remember: Include handles for both teams, avoid legend abbreviations, focus tweets on {favorite_team_handle} and the game date. "
+        "Exclude these stats: Tackles, Kicks, Kick Metres, Long Kicks, Weighted Kicks, Attacking Kicks, Kick Returns, Goal Kicking Percentage. "
+        "Ensure responses are under 265 characters."
+
     )
-        
+
     SYSTEM_PROMPT = (
-        "Welcome to the {favorite_team_handle} fan bot. Your role is to provide accurate and spirited commentary for {favorite_team_handle} fans. "
-        "Engage in discussions with fans about the match against {opponent_handle}, using correct NRL terms. "
-        "Your job is to read data about both teams and create a tweet about it. "
-        "Remember to use handles for both teams and avoid using hashtags. Don't include the abbreviations from the legend in your tweet. "
-        "You cannot create anythong longer than 265 characters. "
+        "Welcome to the {favorite_team_handle} fan bot. Your role is to provide engaging and concise commentary for {favorite_team_handle} fans about the match against {opponent_handle}. "
+        "Use correct NRL terms and team handles, avoiding abbreviations and hashtags. Keep tweets within 265 characters."
     )
 
     OPPONENT_FOUND = (
-        "Enhance the {favorite_team_handle} spirit by discussing their skills and analyzing the strengths of {opponent_handle} in a respectful manner. "
-        "Keep your messages insightful and focused on the game.(with a slight bias towards {favorite_team_handle} ;))"
+        "Enhance {favorite_team_handle} spirit by respectfully discussing their skills and analyzing {opponent_handle}'s strengths. "
+        "Focus on the game, maintaining a slight bias towards {favorite_team_handle}. Keep messages under 265 characters."
     )
 
     NO_OPPONENT_FOUND = (
         "No match for {favorite_team_handle} this week. Provide insights or discuss recent team performances. Avoid using hashtags."
     )
+
     OPPONENT_HANDLE_NOT_FOUND = (
         "Twitter handle not found for the opponent team."
     )
+
 
 class Legend(Enum):
     STATS_LEGEND = (
