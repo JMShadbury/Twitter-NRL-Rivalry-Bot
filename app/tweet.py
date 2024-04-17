@@ -2,15 +2,16 @@ import requests
 from requests_oauthlib import OAuth1
 from util.config import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
 
-def post_tweet(tweet_text):
-    url = "https://api.twitter.com/2/tweets"
-    auth = OAuth1(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-    headers = {
-        "Content-Type": "application/json"
-    }
-    payload = {"text": tweet_text}
-    response = requests.post(url, json=payload, headers=headers, auth=auth)
-    if response.status_code == 201:
-        return response.json()
-    else:
-        raise Exception(f"Tweet could not be posted: {response.text}")
+class TweetManager:
+    def __init__(self):
+        self.url = "https://api.twitter.com/2/tweets"
+        self.auth = OAuth1(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+        self.headers = {"Content-Type": "application/json"}
+
+    def post_tweet(self, tweet_text):
+        payload = {"text": tweet_text}
+        response = requests.post(self.url, json=payload, headers=self.headers, auth=self.auth)
+        if response.status_code == 201:
+            return response.json()
+        else:
+            raise Exception(f"Tweet could not be posted: {response.text}")

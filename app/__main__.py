@@ -1,12 +1,17 @@
-from util.generator import generate_fact
-from .tweet import post_tweet
+from .tweet import TweetManager
+from util.generator import FactGenerator
 
-def main():
-    fact = generate_fact()
-    fact_with_flag = f"{fact} #Automated - 🤖"
-    print(fact_with_flag)
-    response = post_tweet(fact_with_flag)
-    print("Tweet Response:", response)
+class TwitterBot:
+    def __init__(self):
+        self.tweet_manager = TweetManager()
+        self.fact_generator = FactGenerator()
+
+    def run(self):
+        fact = self.fact_generator.generate_fact()
+        print(fact)
+        response = self.tweet_manager.post_tweet(f"{fact} #Automated - 🤖")
+        print("Tweet Response:", response)
 
 if __name__ == "__main__":
-    main()
+    bot = TwitterBot()
+    bot.run()

@@ -12,7 +12,10 @@ ${VENV_NAME}/bin/activate: requirements.txt
 	${PIP} install -r requirements.txt
 	touch ${VENV_NAME}/bin/activate
 
-run: setup
+get_data: setup
+	${PYTHON} -m data_manager
+
+run: get_data
 	${PYTHON} -m app
 
 clean:
