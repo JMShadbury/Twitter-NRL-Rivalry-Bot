@@ -4,4 +4,4 @@ requests-oauthlib==2.0.0
 openai==1.20.0
 selenium==4.19.0
 bs4==0.0.2
-pytz==2021.3
+pytz==2024.1
