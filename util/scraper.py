@@ -10,7 +10,7 @@ class WebScraper:
     def __init__(self, logging):
         self.logging = logging
         options = Options()
-        # options.add_argument("-headless")
+        options.add_argument("-headless")
         self.driver = webdriver.Firefox(options=options)
         
         self.logging.info("Starting Browser")
