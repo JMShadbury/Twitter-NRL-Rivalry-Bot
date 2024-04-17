@@ -2,7 +2,7 @@ from enum import Enum, auto
 
 
 class URL(Enum):
-    NRL_DRAW = "https://www.nrl.com/draw/?competition=111&round=13&season=2024"
+    NRL_DRAW = "https://www.nrl.com/draw"
 
 
 class Team(Enum):
