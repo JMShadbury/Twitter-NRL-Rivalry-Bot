@@ -34,6 +34,7 @@ class Messages(Enum):
     REMINDER = (
         "Remember: Include handles for both teams, avoid legend abbreviations, focus tweets on {favorite_team_handle} and the game date. "
         "Exclude these stats: Tackles, Kicks, Kick Metres, Long Kicks, Weighted Kicks, Attacking Kicks, Kick Returns, Goal Kicking Percentage. "
+        "The stats provided are for the whole year, not just last game"
         "Ensure responses are under 265 characters."
 
     )
