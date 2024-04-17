@@ -47,9 +47,7 @@ class FactGenerator:
 
         team_stats_prompt = json.dumps(self.team_stats)
         date_info = "Todays date is " + str(get_aest_date()) + " game date is " + opponent['date'] if opponent else "No game today"
-        negative_stats = ['ERR', 'PEN', 'MIS', 'DRP', 'FOR', 'AGN', 'KCK', 'KGO', 'TCK', 'MT', 'SUS', 'SB', 'GK']  
         tweet_reminder = "Remember to use handles for both teams and avoid using hashtags. Keep it under 271 characters. Dont talk about stats like kicks"
-        tweet_reminder += f" Don't use negative stats({negative_stats}) when talking about the favorite team."
         
         response = self.client.chat.completions.create(
             model="gpt-4",
