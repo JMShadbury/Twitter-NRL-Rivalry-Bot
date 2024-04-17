@@ -5,8 +5,8 @@ def main():
     fact = generate_fact()
     fact_with_flag = f"{fact} #Automated - 🤖"
     print(fact_with_flag)
-    # response = post_tweet(fact_with_flag)
-    # print("Tweet Response:", response)
+    response = post_tweet(fact_with_flag)
+    print("Tweet Response:", response)
 
 if __name__ == "__main__":
     main()
