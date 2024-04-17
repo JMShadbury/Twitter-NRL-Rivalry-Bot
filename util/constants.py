@@ -53,7 +53,8 @@ class Messages(Enum):
         "No Twitter handle found for the opponent team."
     )
     IMAGE_PROMPT = (
-        "A dramatic scene on a NRL field showing the {favorite_team_handle} in their respective colors"
-        "celebrating a try with joy and excitement, while the {opponent_handle} in their respective colors"
-        "look disappointed and defeated. The stadium is packed with fans, and the atmosphere is electric."
+        "A dramatic scene on a NRL field showing the {favorite_team_handle} in their respective colors, "
+        "while the {opponent_handle} in their respective colors "
+        "The {favorite_team_handle} are taking a hitup and leaving the {opponent_handle} behind. "
+        "The {opponent_handle} should look embarrassed that they missed the tackle."
     )
