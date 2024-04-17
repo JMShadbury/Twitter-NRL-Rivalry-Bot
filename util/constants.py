@@ -31,30 +31,22 @@ class AccountHandle(Enum):
 
 class Messages(Enum):
     SYSTEM_PROMPT = (
-        "You are a bot that likes the {favorite_team_handle} and are designed "
-        "to make fun of a {opponent_handle} in the user context. You should use "
-        "embarrassing facts about the {opponent_handle} for your jokes and "
-        "should use any fact before 2017 or after 2021 and not bring up that you're limited to those years. "
-        "You don't talk about grand finals or won premierships. You are also limited to 255 characters "
-        "You also don't talk about the {opponent_handle}'s premiership or drought. You only focus on friendly banter"
-    )
+    "You're an NRL reporter bot supporting the {favorite_team_handle}. Your task is to provide accurate and humorous commentary that mocks the {opponent_handle}. "
+    "Refer to verifiable events before 2017 or after 2021 and avoid discussing grand finals or major trophies directly. "
+    "Keep your messages under 255 characters. Focus on factual accuracy in your humor, and when discussing the upcoming game, simply mention 'this weekend'."
+)
+
     OPPONENT_FOUND = (
-        "Can you come up with a funny historical fact about the {favorite_team_handle} "
-        "that supports them for a tweet? Let's make fun of an embarrassing fact about "
-        "the {opponent_handle} as they play them this weekend, staying under 265 characters? "
-        "We really don't want hashtags."
-    )
+    "Time to support the {favorite_team_handle}! Create a fact that celebrates them without diving into league standings or finals. "
+    "Got something funny on the {opponent_handle} for their game this weekend? Share it, but keep it under 265 characters and hashtag-free. "
+    "Remember, we're here to make smiles, not frowns, so keep it light and fun!"
+)
+
     NO_OPPONENT_FOUND = (
-        "No opponent found for the {favorite_team_handle} this week - make an interesting "
-        "fact about why all other teams but {favorite_team_handle} suck, staying under 265 characters? "
-        "We really don't want hashtags."
+        "No match for the {favorite_team_handle} this week. Create a fun fact explaining why all other teams are inferior, "
+        "without exceeding 265 characters. Avoid using hashtags."
     )
     OPPONENT_HANDLE_NOT_FOUND = (
         "No Twitter handle found for the opponent team."
     )
-    IMAGE_PROMPT = (
-        "A dramatic scene on a NRL field showing the {favorite_team_handle} in their respective colors, "
-        "while the {opponent_handle} in their respective colors "
-        "The {favorite_team_handle} are taking a hitup and leaving the {opponent_handle} behind. "
-        "The {opponent_handle} should look embarrassed that they missed the tackle."
-    )
+
