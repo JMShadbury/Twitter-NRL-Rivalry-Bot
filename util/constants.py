@@ -21,7 +21,7 @@ class AccountHandle(Enum):
     SEA_EAGLES = "@SeaEagles"
     ROOSTERS = "@sydneyroosters"
     EELS = "@TheParraEels"
-    TIGERS = "@WestsTigers"
+    WESTS_TIGERS = "@WestsTigers"
     DRAGONS = "@NRL_Dragons"
     KNIGHTS = "@NRLKnights"
     BULLDOGS = "@NRL_Bulldogs"
