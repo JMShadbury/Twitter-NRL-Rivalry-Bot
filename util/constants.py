@@ -51,3 +51,8 @@ class Messages(Enum):
     OPPONENT_HANDLE_NOT_FOUND = (
         "No Twitter handle found for the opponent team."
     )
+    IMAGE_PROMPT = (
+        "A dramatic scene on a NRL field showing the {favorite_team_handle} in their respective colors"
+        "celebrating a try with joy and excitement, while the {opponent_handle} in their respective colors"
+        "look disappointed and defeated. The stadium is packed with fans, and the atmosphere is electric."
+    )
