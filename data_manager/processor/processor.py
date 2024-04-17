@@ -1,7 +1,7 @@
 import re
 import json
 import os
-from constants import DATA_DIRECTORY, DATA_FILENAME
+from ..constants import DATA_DIRECTORY, DATA_FILENAME
 
 class DataProcessor:
     def __init__(self, directory=DATA_DIRECTORY):

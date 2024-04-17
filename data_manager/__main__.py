@@ -1,6 +1,6 @@
 # main.py
-from scraper.scraper import WebScraper
-from processor.processor import DataProcessor
+from .scraper.scraper import WebScraper
+from .processor.processor import DataProcessor
 
 def main():
     scraper = WebScraper()

@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import json
-from constants import BASE_URL, DATA_PATH
+from ..constants import BASE_URL, DATA_PATH
 
 class WebScraper:
     def __init__(self):
