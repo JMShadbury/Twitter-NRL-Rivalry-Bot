@@ -4,13 +4,18 @@ import os
 from ..constants import DATA_DIRECTORY, DATA_FILENAME
 
 class DataProcessor:
-    def __init__(self, directory=DATA_DIRECTORY):
+    def __init__(self, logging, directory=DATA_DIRECTORY):
+        self.logging = logging
         self.directory = directory
         os.makedirs(self.directory, exist_ok=True)
+        self.logging.info("Data Processor Initialized")
 
     def clean_team_name(self, name):
-        original_name = name 
+        self.logging.debug(f"Cleaning team name: {name}")
         cleaned_name = re.sub(r'^\d+(?=\D)', '', name)
+        self.logging.debug(f"Cleaned team name: {cleaned_name}")
+        
+        
         return cleaned_name
 
     def process_data(self, raw_data):

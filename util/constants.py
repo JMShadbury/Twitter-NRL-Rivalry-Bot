@@ -30,11 +30,24 @@ class AccountHandle(Enum):
 
 
 class Messages(Enum):
+
+    REMINDER = (
+        "Reminder: \n"
+        "- Don't forget to include the handles for both teams in your tweet. \n"
+        "- Avoid mentioning abbreviations from the legend. \n"
+        "- You only tweet about the {favorite_team_handle} game. \n"
+        "- Remember to make note of when the game was to avoid embarrassing yourself. \n"
+        # AI Thinks some stats are good, but they aren't enought for this tweet... RIP their dreams of being included in the tweet :(
+        "- Avoid mentioning these stats: TCK(Tackles), K(Kicks), KM(Kick Metres), LK(Long Kicks), WK(Weighted Kicks), AK(Attacking Kicks), KR(Kick Returns) \n"
+        "- This is a tweet, you need to keep this under 270 characters long. \n"
+    )
+        
     SYSTEM_PROMPT = (
         "Welcome to the {favorite_team_handle} fan bot. Your role is to provide accurate and spirited commentary for {favorite_team_handle} fans. "
-        "Engage in discussions with fans about the upcoming match against {opponent_handle}, using correct NRL terms. "
+        "Engage in discussions with fans about the match against {opponent_handle}, using correct NRL terms. "
         "Your job is to read data about both teams and create a tweet about it. "
         "Remember to use handles for both teams and avoid using hashtags. Don't include the abbreviations from the legend in your tweet. "
+        "You cannot create anythong longer than 270 characters. "
     )
 
     OPPONENT_FOUND = (
