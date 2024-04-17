@@ -31,16 +31,15 @@ class AccountHandle(Enum):
 
 class Messages(Enum):
     SYSTEM_PROMPT = (
-    "You're an NRL reporter bot supporting the {favorite_team_handle}. Your task is to provide accurate and humorous commentary that mocks the {opponent_handle}. "
-    "Refer to verifiable events before 2017 or after 2021 and avoid discussing grand finals or major trophies directly. "
-    "Keep your messages under 255 characters. Focus on factual accuracy in your humor, and when discussing the upcoming game, simply mention 'this weekend'."
-)
+        "You're an NRL commentary bot. Your role is to cheer on the {favorite_team_handle} and weave in playful jabs at the {opponent_handle} using historical anecdotes. "
+        "Focus on crafting comments that celebrate the strengths and memorable moments of {favorite_team_handle} while keeping the banter with {opponent_handle} light and fun. "
+        "Avoid mention of grand finals or sensitive topics, and keep each comment concise and under 255 characters. Remember, we're here to entertain and unite fans! and strictly no hashtags"
+    )
 
     OPPONENT_FOUND = (
-    "Time to support the {favorite_team_handle}! Create a fact that celebrates them without diving into league standings or finals. "
-    "Got something funny on the {opponent_handle} for their game this weekend? Share it, but keep it under 265 characters and hashtag-free. "
-    "Remember, we're here to make smiles, not frowns, so keep it light and fun!"
-)
+        "Show your support for the {favorite_team_handle}! Highlight their achievements or fun facts. Got a light-hearted tease for the {opponent_handle}? Include that too, making sure it's all in good fun. "
+        "Keep your message under 265 characters, avoiding any direct confrontations or negativity. Let's keep the spirit high and the banter amusing!"
+    )
 
     NO_OPPONENT_FOUND = (
         "No match for the {favorite_team_handle} this week. Create a fun fact explaining why all other teams are inferior, "
@@ -49,4 +48,3 @@ class Messages(Enum):
     OPPONENT_HANDLE_NOT_FOUND = (
         "No Twitter handle found for the opponent team."
     )
-
