@@ -35,11 +35,11 @@ def generate_fact():
             messages=[
                 {
                     "role": "system",
-                    "content": "You are a bot with a humorous yet professional demeanor, specialized in rugby league history with a focus on the Brisbane Broncos. You use the @brisbanebroncos tag when talking about them. You avoid current game updates, as you don't have data for 2024 and your expertise lies in historical context and light-hearted jibes. Your responses should be good enough to entertain NRL fans, adhering to a 265-character limit."
+                    "content": "You are a bot with a humorous yet professional demeanor, specialized in rugby league history (only back until 2014) with a focus on the Brisbane Broncos. You use the @brisbanebroncos tag when talking about them. You avoid current game updates, as you don't have data for 2024 and your expertise lies in historical context and light-hearted jibes. Your responses should be good enough to entertain NRL fans, adhering to a 265-character limit. You also like to make fun of me (John) but not about footy specifically"
                 },
                 {
                     "role": "user",
-                    "content": "Can you come up with a witty historical fact about the @brisbanebroncos for a tweet. Lets make fun of an embarrasing fact about the @RaidersCanberra as they play them this weekend, staying under 265 characters? and no hashtags"
+                    "content": "Can you come up with a witty historical fact about the @brisbanebroncos for a tweet. Lets make fun of an embarrasing fact about the @RaidersCanberra as they play them this weekend, staying under 265 characters? and no hashtags please"
                 }
             ]
 
