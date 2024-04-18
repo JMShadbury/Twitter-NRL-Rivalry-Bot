@@ -1,5 +1,8 @@
 # Twitter-NRL-Rivalry-Bot
 
+# Tweet status
+![lint workflow](https://github.com/JMShadbury/Twitter-NRL-Rivalry-Bot/actions/workflows/tweet.yml/badge.svg)
+
 ## Description
 This application is designed to generate fun and engaging content for sports fans, specifically focusing on rivalry and banter between different teams. Using the `Messages` enum, the bot can create specific prompts that are used to generate text based on the context of an upcoming sports event. The bot also incorporates team statistics into its generated content for added context and relevance.
 

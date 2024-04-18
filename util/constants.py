@@ -32,11 +32,8 @@ class AccountHandle(Enum):
 class Messages(Enum):
 
     REMINDER = (
-        "The below are reminders you need to ensure you follow when generating tweets: \n"
-        "Include handles for both teams, avoid legend abbreviations, focus tweets on {favorite_team_handle} and the game date. \n"
-        "Exclude these stats: Tackles, Kicks, Kick Metres, Long Kicks, Weighted Kicks, Attacking Kicks, Kick Returns, Goal Kicking Percentage. \n"
-        "The stats provided are for the whole year, not just last game \n" 
-        "Ensure responses are under 265 characters. \n"
+        "Ensure responses are engaging and concise. Use correct NRL terms and team handles, avoiding abbreviations of stats and hashtags. "
+        "Keep tweets within 265 characters."
 
     )
 

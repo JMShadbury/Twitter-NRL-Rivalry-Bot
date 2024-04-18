@@ -6,6 +6,7 @@ from openai import OpenAI
 from datetime import datetime, timedelta
 import pytz
 
+
 def get_aest_date():
     aest_timezone = pytz.timezone('Australia/Sydney')
     aest_date = datetime.now(aest_timezone).date()
@@ -17,7 +18,6 @@ class FactGenerator:
         self.client = OpenAI(api_key=GPT_API_KEY)
         self.scraper = WebScraper(self.logging)
         self.team_stats = self.load_team_stats()
-        
 
     def load_team_stats(self):
         with open('data/team_stats.json', 'r') as file:
@@ -28,38 +28,36 @@ class FactGenerator:
         team_data = self.scraper.get_team_data()
         opponent = self.scraper.get_opponent(team_data)
         favorite_team_handle = getattr(AccountHandle, favorite_team.replace(" ", "_").upper(), None)
-        
-        self.logging.debug(f"Favorite Team: {favorite_team}")
-        self.logging.debug(f"Team Data: {team_data}")
-        self.logging.debug(f"Opponent: {opponent}")
-        self.logging.debug(f"Favorite Team Handle: {favorite_team_handle}")
 
         if not favorite_team_handle:
             self.logging.error("Favorite team handle not found in ENUM.")
             return "Favorite team handle not found in ENUM."
 
+        opponent_team = opponent['opponent_team'].replace(" ", "_").upper() if opponent else None
+        opponent_handle = getattr(AccountHandle, opponent_team, None) if opponent_team else None
+
+        prompt = Messages.NO_OPPONENT_FOUND.value.format(favorite_team_handle=favorite_team_handle.value)
         if opponent:
-            opponent_team = opponent['opponent_team'].replace(" ", "_").upper()
-            opponent_handle = getattr(AccountHandle, opponent_team, None)
-            
-            self.logging.debug(f"Opponent Team: {opponent_team}")
-            self.logging.debug(f"Opponent Handle: {opponent_handle}")
-            
-            self.logging.info(f"Opponent found: {opponent['opponent_team']}")
             if opponent_handle:
                 prompt = Messages.OPPONENT_FOUND.value.format(favorite_team_handle=favorite_team_handle.value, opponent_handle=opponent_handle.value)
             else:
                 prompt = Messages.OPPONENT_HANDLE_NOT_FOUND.value
-        else:
-            prompt = Messages.NO_OPPONENT_FOUND.value.format(favorite_team_handle=favorite_team_handle.value)
 
-        # Adding the legend prompt
         legend_prompt = Legend.STATS_LEGEND.value
-
-        self.logging.debug(f"Prompt: {prompt}")
         team_stats_prompt = json.dumps(self.team_stats)
-        
-       # Transform date string
+        date_info = self.calculate_date_info(opponent)
+
+        response = self.request_fact(Messages.SYSTEM_PROMPT.value, team_stats_prompt, legend_prompt, prompt, date_info)
+        new_fact = response.choices[0].message.content.strip().strip('"')
+
+        if len(new_fact) > 265:
+            self.logging.warning(f"Generated content too long ({len(new_fact)} characters). Asking to shorten...")
+            return self.request_shorten(new_fact)
+
+        return new_fact
+
+    def calculate_date_info(self, opponent):
+        # Transform date string
         game_date_str = opponent['date']
         # Removing the day of the week and the 'th' from the date
         game_date_str = ' '.join(game_date_str.split()[1:]).replace('th', '')
@@ -72,29 +70,37 @@ class FactGenerator:
 
         # Calculate the difference in days
         delta_days = (game_date - today_date).days
-        
-        
         if delta_days > 0:
-            date_info = f"This game is in {delta_days} days."
+            return f"This game is in {delta_days} days."
         elif delta_days == 0:
-            date_info = "This game is today."
+            return "This game is today."
         else:
-            date_info = "This game is already over."
-        
+            return "This game has passed."
+
+    def request_fact(self, system_prompt, team_stats_prompt, legend_prompt, game_prompt, date_info):
         self.logging.info("Requesting completion from GPT-4")
+        return self.client.chat.completions.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": team_stats_prompt},
+                {"role": "user", "content": legend_prompt},
+                {"role": "user", "content": game_prompt},
+                {"role": "user", "content": date_info},
+                {"role": "user", "content": Messages.REMINDER.value},
+                {"role": "user", "content": "Remember to keep it under 265 characters or this will fail and no hashtags."}
+            ]
+        )
+
+    def request_shorten(self, fact):
+        self.logging.info("Asking GPT-4 to shorten the content")
         response = self.client.chat.completions.create(
             model="gpt-4",
             messages=[
-                {"role": "system", "content": Messages.SYSTEM_PROMPT.value},
-                {"role": "user", "content": team_stats_prompt},  
-                {"role": "user", "content": legend_prompt},
-                {"role": "user", "content": prompt},
-                {"role": "user", "content": date_info},
-                {"role": "user", "content": Messages.REMINDER.value},
-                {"role": "user", "content": "Remember to keep it under 265 characters or this will fail!"}
+                {"role": "system", "content": "Please rewrite the following text to be less than 265 characters while maintaining all critical information."},
+                {"role": "user", "content": fact}
             ]
         )
-        
-        self.logging.info("Response received")
-        new_fact = response.choices[0].message.content.strip().strip('"')
-        return new_fact
+        shortened_fact = response.choices[0].message.content.strip().strip('"')
+        return shortened_fact
+
