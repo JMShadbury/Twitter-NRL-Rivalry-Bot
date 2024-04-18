@@ -90,8 +90,8 @@ class FactGenerator:
                 {"role": "user", "content": legend_prompt},
                 {"role": "user", "content": prompt},
                 {"role": "user", "content": date_info},
-                {"role": "user", "content": "Pay attention to the reminders that are about to come"},
-                {"role": "user", "content": Messages.REMINDER.value}
+                {"role": "user", "content": Messages.REMINDER.value},
+                {"role": "user", "content": "Remember to keep it under 265 characters"}
             ]
         )
         

@@ -2,8 +2,7 @@ VENV_NAME?=venv
 PYTHON=${VENV_NAME}/bin/python
 PIP=${VENV_NAME}/bin/pip
 
-# Default target executed when no arguments are given to make.
-default: setup
+default: run
 
 setup: ${VENV_NAME}/bin/activate
 
