@@ -91,7 +91,7 @@ class FactGenerator:
                 {"role": "user", "content": prompt},
                 {"role": "user", "content": date_info},
                 {"role": "user", "content": Messages.REMINDER.value},
-                {"role": "user", "content": "Remember to keep it under 265 characters"}
+                {"role": "user", "content": "Remember to keep it under 265 characters or this will fail!"}
             ]
         )
         
