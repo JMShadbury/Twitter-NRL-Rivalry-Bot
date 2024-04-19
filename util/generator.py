@@ -57,19 +57,12 @@ class FactGenerator:
         return new_fact
 
     def calculate_date_info(self, opponent):
-        # Transform date string
         game_date_str = opponent['date']
-        # Removing the day of the week and the 'th' from the date
         game_date_str = ' '.join(game_date_str.split()[1:]).replace('th', '')
-
-        # Parse the date with the year hardcoded as 2024
         game_date = datetime.strptime(f"{game_date_str} 2024", "%d %B %Y").date()
-
-        # Get today's date directly as a date object for comparison
         today_date = get_aest_date()
-
-        # Calculate the difference in days
         delta_days = (game_date - today_date).days
+        
         if delta_days > 0:
             return f"This game is in {delta_days} days."
         elif delta_days == 0:
@@ -79,6 +72,7 @@ class FactGenerator:
 
     def request_fact(self, system_prompt, team_stats_prompt, legend_prompt, game_prompt, date_info):
         self.logging.info("Requesting completion from GPT-4")
+        print(date_info)
         return self.client.chat.completions.create(
             model="gpt-4",
             messages=[
@@ -86,9 +80,9 @@ class FactGenerator:
                 {"role": "user", "content": team_stats_prompt},
                 {"role": "user", "content": legend_prompt},
                 {"role": "user", "content": game_prompt},
-                {"role": "user", "content": date_info},
                 {"role": "user", "content": Messages.REMINDER.value},
-                {"role": "user", "content": "Remember to keep it under 265 characters or this will fail and no hashtags."}
+                {"role": "user", "content": date_info}
+                
             ]
         )
 
