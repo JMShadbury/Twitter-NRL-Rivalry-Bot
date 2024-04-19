@@ -97,7 +97,7 @@ class FactGenerator:
         response = self.client.chat.completions.create(
             model="gpt-4",
             messages=[
-                {"role": "system", "content": "Please rewrite the following text to be less than 265 characters while maintaining all critical information."},
+                {"role": "system", "content": "This tweet needs to be less than 265 characters long."},
                 {"role": "user", "content": fact}
             ]
         )
