@@ -1,6 +1,6 @@
 # Twitter-NRL-Rivalry-Bot
 
-# Tweet status
+### Tweet status
 ![lint workflow](https://github.com/JMShadbury/Twitter-NRL-Rivalry-Bot/actions/workflows/tweet.yml/badge.svg)
 
 ## Description
