@@ -72,7 +72,6 @@ class FactGenerator:
 
     def request_fact(self, system_prompt, team_stats_prompt, legend_prompt, game_prompt, date_info):
         self.logging.info("Requesting completion from GPT-4")
-        print(date_info)
         return self.client.chat.completions.create(
             model="gpt-4",
             messages=[
