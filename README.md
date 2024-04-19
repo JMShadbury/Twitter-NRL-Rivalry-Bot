@@ -17,7 +17,7 @@ To set up the Sports Rivalry Bot, follow these steps:
 1. Ensure you have Python installed on your machine. Python 3.8 or higher is recommended.
 2. Clone this repository to your local machine.
 3. Set up a virtual environment and install dependencies by running `make setup`.
-4. Obtain necessary API keys and configurations as described in the project's documentation.
+4. Obtain necessary API keys and configurations.
     - Get the ChatGPT API key from the OpenAI website.
     - Get the Twitter API key from the Twitter Developer Portal.
 5. Update the configuration file with the obtained API keys.
