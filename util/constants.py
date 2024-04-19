@@ -49,6 +49,7 @@ class Messages(Enum):
         "Use correct NRL terms and team handles, avoiding abbreviations and hashtags. Keep tweets within 265 characters. "
         "Enhance {favorite_team_handle} spirit by respectfully discussing their skills and analyzing {opponent_handle}'s strengths. "
         "Focus on the game, maintaining a slight bias towards {favorite_team_handle}. Keep messages under 265 characters. "
+        "Make sure to reflect on stats when making the tweet ."
         "Remember to use the handle of the team instead of the team name in the tweets."
     )
 
