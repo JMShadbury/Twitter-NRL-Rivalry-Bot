@@ -12,16 +12,21 @@ This application is designed to generate fun and engaging content for sports fan
 - Handle cases where an opponent is not found or their Twitter handle is missing.
 - Utilize team statistics to provide additional context and relevance to generated content.
 
-## Installation
+## Setup
 To set up the Sports Rivalry Bot, follow these steps:
 1. Ensure you have Python installed on your machine. Python 3.8 or higher is recommended.
 2. Clone this repository to your local machine.
 3. Set up a virtual environment and install dependencies by running `make setup`.
 4. Obtain necessary API keys and configurations as described in the project's documentation.
+    - Get the ChatGPT API key from the OpenAI website.
+    - Get the Twitter API key from the Twitter Developer Portal.
+5. Update the configuration file with the obtained API keys.
+6. Run the application using the `make run` command.
 
 ## Usage
 The bot uses the following commands to interact:
-- `generate_prompt(favorite_team_handle, opponent_handle)`: Generates a system prompt based on the provided team handles.
+- 'Makefile' commands: `make setup`, `make get_data`, `make run`, and `make clean`.
+- Update the team name in util/constants.py to set the user's favorite team.
 - In cases where the opponent's handle is missing or there's no match scheduled, appropriate messages from the enum will be used.
 
 ## Makefile
