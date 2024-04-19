@@ -33,7 +33,9 @@ class Messages(Enum):
 
     REMINDER = (
         "Ensure responses are engaging and concise. Use correct NRL terms and team handles, avoiding abbreviations of stats and hashtags. "
-        "Keep tweets within 265 characters."
+        "Keep tweets within 265 characters. "
+        "Remember to take note of the date of the game to avoid confusion. "
+        "The stats are for the current season, not a specific game. "
 
     )
 
