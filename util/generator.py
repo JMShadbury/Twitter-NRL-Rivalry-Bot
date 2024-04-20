@@ -54,10 +54,14 @@ class FactGenerator:
             response = self.request_fact(Messages.SYSTEM_PROMPT.value, team_stats_prompt, legend_prompt, prompt, date_info, score_info)
         new_fact = response.choices[0].message.content.strip().strip('"')
 
-        if len(new_fact) > 265:
+        fact_too_long = len(new_fact) > 265
+        while fact_too_long:
             self.logging.warning(f"Generated content too long ({len(new_fact)} characters). Asking to shorten...")
-            return self.request_shorten(new_fact)
-
+            result = self.request_shorten(new_fact)
+            if len(result) > 265:
+                self.logging.warning(f"Content still too long ({len(result)} characters).")
+            else:
+                return result
         return new_fact
     
     def get_game_outcome(self, opponent):
@@ -129,7 +133,7 @@ class FactGenerator:
         response = self.client.chat.completions.create(
             model="gpt-4",
             messages=[
-                {"role": "system", "content": "This tweet needs to be less than 265 characters long. - Remove all hashtags"},
+                {"role": "system", "content": "This needs to be less than 265 characters long. - Remove all hashtags"},
                 {"role": "user", "content": fact}
             ]
         )
