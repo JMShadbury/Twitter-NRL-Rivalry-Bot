@@ -55,9 +55,11 @@ class FactGenerator:
         new_fact = response.choices[0].message.content.strip().strip('"')
 
         fact_too_long = len(new_fact) > 265
-        while fact_too_long:
+        count = 0
+        while fact_too_long and count < 3:
             self.logging.warning(f"Generated content too long ({len(new_fact)} characters). Asking to shorten...")
-            result = self.request_shorten(new_fact)
+            result = self.request_shorten(new_fact, count)
+            count += 1
             if len(result) > 265:
                 self.logging.warning(f"Content still too long ({len(result)} characters).")
             else:
@@ -101,16 +103,22 @@ class FactGenerator:
 
     def request_fact(self, system_prompt, team_stats_prompt, legend_prompt, game_prompt, date_info, score_info=None):
         self.logging.info("Requesting completion from GPT-4")
+        self.system_prompt = system_prompt
+        self.team_stats_prompt = team_stats_prompt
+        self.legend_prompt = legend_prompt
+        self.game_prompt = game_prompt
+        self.date_info = date_info
+        self.score_info = score_info
         if not score_info:
             return self.client.chat.completions.create(
                 model="gpt-4",
                 messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": team_stats_prompt},
-                    {"role": "user", "content": legend_prompt},
-                    {"role": "user", "content": game_prompt},
+                    {"role": "system", "content": self.system_prompt},
+                    {"role": "user", "content": self.team_stats_prompt},
+                    {"role": "user", "content": self.legend_prompt},
+                    {"role": "user", "content": self.game_prompt},
                     {"role": "user", "content": Messages.REMINDER.value},
-                    {"role": "user", "content": date_info}
+                    {"role": "user", "content": self.date_info}
                     
                 ]
             )
@@ -118,25 +126,40 @@ class FactGenerator:
             return self.client.chat.completions.create(
                 model="gpt-4",
                 messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": team_stats_prompt},
-                    {"role": "user", "content": legend_prompt},
-                    {"role": "user", "content": game_prompt},
+                    {"role": "system", "content": self.system_prompt},
+                    {"role": "user", "content": self.team_stats_prompt},
+                    {"role": "user", "content": self.legend_prompt},
+                    {"role": "user", "content": self.game_prompt},
                     {"role": "user", "content": Messages.REMINDER.value},
-                    {"role": "user", "content": date_info},
-                    {"role": "user", "content": score_info}
+                    {"role": "user", "content": self.date_info},
+                    {"role": "user", "content": "Never mention Tackles as a stat, content should be humerous."},
+                    {"role": "user", "content": self.score_info}
                 ]
             )
 
-    def request_shorten(self, fact):
+    def request_shorten(self, fact, count):
         self.logging.info("Asking GPT-4 to shorten the content")
-        response = self.client.chat.completions.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": "This needs to be less than 265 characters long. - Remove all hashtags"},
-                {"role": "user", "content": fact}
-            ]
-        )
+        if count < 2:
+            response = self.client.chat.completions.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": "This needs to be less than 265 characters long. - Remove all hashtags "},
+                    {"role": "user", "content": "Remember to not use stat abbreviations. Don't mention fans, you're just making a funny opinion. "},
+                    {"role": "user", "content": "Ensure you keep @mentions in the content. We add content on, which is why its 265."},
+                    {"role": "user", "content": self.legend_prompt},
+                    {"role": "user", "content": fact}
+                ]
+            )
+        else:
+            response = self.client.chat.completions.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": "This needs to be less than 265 characters long. - Remove all hashtags "},
+                    {"role": "user", "content": "This is the last attempt to shorten the content. Remember no longer than 265 characters. "},
+                    {"role": "user", "content": "Don't mention fans, you're just making a funny opinion."},
+                    {"role": "user", "content": fact},
+                ]
+            )
         shortened_fact = response.choices[0].message.content.strip().strip('"')
         return shortened_fact
 
