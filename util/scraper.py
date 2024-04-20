@@ -38,14 +38,44 @@ class WebScraper:
             date = match.find("p", class_="match-header__title").get_text(strip=True)
             home_team_info = match.find("div", class_="match-team--home")
             away_team_info = match.find("div", class_="match-team--away")
+            score_home = None
+            score_away = None
+            winning_attribute = "match-team__score match-team__score--home"
+            losing_attribute = "match-team__score match-team__score--away u-font-weight-300"
+            
+            try:
+                score_home = home_team_info.find("div", class_=winning_attribute).get_text(strip=True).strip("Scored").strip("points")
+            except AttributeError:
+                self.logging.debug("Score not found, check losing attribute.")
+                try:
+                    score_home = home_team_info.find("div", class_=losing_attribute).get_text(strip=True).strip("Scored").strip("points")
+                except AttributeError:
+                    self.logging.debug("No score for game.")
+            try:
+                score_away = away_team_info.find("div", class_=winning_attribute).get_text(strip=True).strip("Scored").strip("points")
+            except AttributeError:
+                self.logging.debug("Score not found, check losing attribute.")
+                try:
+                    score_away = away_team_info.find("div", class_=losing_attribute).get_text(strip=True).strip("Scored").strip("points")
+                except AttributeError:
+                    self.logging.debug("No score for game.")
 
-            game_details = {
-                "date": date,
-                "home_team": home_team_info.find("p", class_="match-team__name").get_text(strip=True),
-                # "home_position": home_team_info.find("p", class_="match-team__position").get_text(strip=True),
-                "away_team": away_team_info.find("p", class_="match-team__name").get_text(strip=True),
-                # "away_position": away_team_info.find("p", class_="match-team__position").get_text(strip=True)
-            }
+            if score_home and score_away:
+                game_details = {
+                    "date": date,
+                    "home_team": home_team_info.find("p", class_="match-team__name").get_text(strip=True),
+                    "away_team": away_team_info.find("p", class_="match-team__name").get_text(strip=True),
+                    "home_score": score_home,
+                    "away_score": score_away
+                }
+            else:
+                game_details = {
+                    "date": date,
+                    "home_team": home_team_info.find("p", class_="match-team__name").get_text(strip=True),
+                    "away_team": away_team_info.find("p", class_="match-team__name").get_text(strip=True),
+                    "home_score": "N/A",
+                    "away_score": "N/A"
+                }
             self.logging.debug(f"Game Details: {game_details}")
             match_info.append(game_details)
             self.logging.debug(f"Match Info: {match_info}")
@@ -58,5 +88,7 @@ class WebScraper:
         for match in team_data:
             if favorite_team in match['home_team'].lower() or favorite_team in match['away_team'].lower():
                 opponent = match['away_team'] if favorite_team in match['home_team'].lower() else match['home_team']
-                return {'opponent_team': opponent, 'date': match['date']}
+                opponent_score = match['away_score'] if favorite_team in match['home_team'].lower() else match['home_score']
+                favorite_score = match['home_score'] if favorite_team in match['home_team'].lower() else match['away_score']
+                return {'opponent_team': opponent, 'date': match['date'], 'opponent_score': opponent_score, 'favorite_score': favorite_score}
         return None

@@ -46,8 +46,12 @@ class FactGenerator:
         legend_prompt = Legend.STATS_LEGEND.value
         team_stats_prompt = json.dumps(self.team_stats)
         date_info = self.calculate_date_info(opponent)
+        score_info = self.get_game_outcome(opponent)
 
-        response = self.request_fact(Messages.SYSTEM_PROMPT.value, team_stats_prompt, legend_prompt, prompt, date_info)
+        if not score_info:
+            response = self.request_fact(Messages.SYSTEM_PROMPT.value, team_stats_prompt, legend_prompt, prompt, date_info)
+        else:
+            response = self.request_fact(Messages.SYSTEM_PROMPT.value, team_stats_prompt, legend_prompt, prompt, date_info, score_info)
         new_fact = response.choices[0].message.content.strip().strip('"')
 
         if len(new_fact) > 265:
@@ -55,6 +59,27 @@ class FactGenerator:
             return self.request_shorten(new_fact)
 
         return new_fact
+    
+    def get_game_outcome(self, opponent):
+        opponent_score = opponent['opponent_score']
+        favorite_score = opponent['favorite_score']
+        
+        
+        if opponent_score == "N/A" or favorite_score == "N/A":
+            return None
+        else:
+            if opponent_score > favorite_score:
+                message = f"Make fun of {opponent['opponent_team']}, they only won because they cheated. - this is obviously needs to be a "
+                message += "sarcastic tweet that is deliberately made out to be a humerous joke."
+                return message
+            elif opponent_score < favorite_score:
+                score_data = f"Favorite Score: {favorite_score} - Opponent Score: {opponent_score}"
+                message = "The favorite team already won the game. "
+                message += "The game we are talking about is already over, "
+                message += f"{score_data} Talk about the attacking master class of the favorite team and the defensive prowess of the opponent."
+                return message
+            else:
+                return "The game ended in a draw."
 
     def calculate_date_info(self, opponent):
         game_date_str = opponent['date']
@@ -70,20 +95,34 @@ class FactGenerator:
         else:
             return "This game has passed."
 
-    def request_fact(self, system_prompt, team_stats_prompt, legend_prompt, game_prompt, date_info):
+    def request_fact(self, system_prompt, team_stats_prompt, legend_prompt, game_prompt, date_info, score_info=None):
         self.logging.info("Requesting completion from GPT-4")
-        return self.client.chat.completions.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": team_stats_prompt},
-                {"role": "user", "content": legend_prompt},
-                {"role": "user", "content": game_prompt},
-                {"role": "user", "content": Messages.REMINDER.value},
-                {"role": "user", "content": date_info}
-                
-            ]
-        )
+        if not score_info:
+            return self.client.chat.completions.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": team_stats_prompt},
+                    {"role": "user", "content": legend_prompt},
+                    {"role": "user", "content": game_prompt},
+                    {"role": "user", "content": Messages.REMINDER.value},
+                    {"role": "user", "content": date_info}
+                    
+                ]
+            )
+        else:
+            return self.client.chat.completions.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": team_stats_prompt},
+                    {"role": "user", "content": legend_prompt},
+                    {"role": "user", "content": game_prompt},
+                    {"role": "user", "content": Messages.REMINDER.value},
+                    {"role": "user", "content": date_info},
+                    {"role": "user", "content": score_info}
+                ]
+            )
 
     def request_shorten(self, fact):
         self.logging.info("Asking GPT-4 to shorten the content")
