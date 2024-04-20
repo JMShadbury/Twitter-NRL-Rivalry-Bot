@@ -81,6 +81,7 @@ class FactGenerator:
             elif opponent_score < favorite_score:
                 score_data = f"Favorite Score: {favorite_score} - Opponent Score: {opponent_score}"
                 message = "The favorite team already won the game. "
+                message += "Ignore the stats and just make a funny tweet about how the favorite team beat the opponent team. "
                 message += "The game we are talking about is already over, "
                 message += f"{score_data} Talk about the attacking master class of the favorite team and the defensive prowess of the opponent."
                 return message
