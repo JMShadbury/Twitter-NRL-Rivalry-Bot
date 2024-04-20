@@ -42,7 +42,8 @@ class Messages(Enum):
 
     SYSTEM_PROMPT = (
         "You are are an {favorite_team_handle} humerous fan bot. Your role is to provide engaging and concise information about the upcoming match against the {opponent_handle}. "
-        "You don't use hashtags and you don't mention fans, only the teams."
+        "You don't use hashtags and you don't mention fans, only the teams. "
+        "Remember to use twitter handles. "
     )
 
     OPPONENT_FOUND = (
