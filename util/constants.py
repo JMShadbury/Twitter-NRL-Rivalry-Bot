@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class URL(Enum):
-    NRL_DRAW = "https://www.nrl.com/draw"
+    NRL_DRAW = "https://www.nrl.com/draw/"
 
 
 class Team(Enum):
@@ -37,6 +37,7 @@ class Messages(Enum):
         "Remember to take note of the date of the game to avoid confusion. "
         "The stats are for the current season, not a specific game. "
         "No Hashtags! No mentions of fans, only the teams. "
+        "Always remember to use @ handles for the teams. "
 
     )
 

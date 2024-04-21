@@ -45,7 +45,10 @@ class FactGenerator:
 
         legend_prompt = Legend.STATS_LEGEND.value
         team_stats_prompt = json.dumps(self.team_stats)
-        date_info = self.calculate_date_info(opponent)
+        try:
+            date_info = self.calculate_date_info(opponent)
+        except:
+            date_info = "Favourite team doesn't play this week."
         score_info = self.get_game_outcome(opponent)
 
         if not score_info:
@@ -67,8 +70,11 @@ class FactGenerator:
         return new_fact
     
     def get_game_outcome(self, opponent):
-        opponent_score = opponent['opponent_score']
-        favorite_score = opponent['favorite_score']
+        try:
+            opponent_score = opponent['opponent_score']
+            favorite_score = opponent['favorite_score']
+        except:
+            return None
         
         
         if opponent_score == "N/A" or favorite_score == "N/A":
