@@ -146,8 +146,9 @@ class FactGenerator:
                 messages=[
                     {"role": "system", "content": "This needs to be less than 265 characters long. - Remove all hashtags "},
                     {"role": "user", "content": "Remember to not use stat abbreviations. Don't mention fans, you're just making a funny opinion. "},
-                    {"role": "user", "content": "Ensure you keep @mentions in the content. We add content on, which is why its 265."},
+                    {"role": "user", "content": "Ensure you keep the @ handles in the content. We add content on, which is why its 265. "},
                     {"role": "user", "content": self.legend_prompt},
+                    {"role": "user", "content": self.date_info},
                     {"role": "user", "content": fact}
                 ]
             )
@@ -157,7 +158,8 @@ class FactGenerator:
                 messages=[
                     {"role": "system", "content": "This needs to be less than 265 characters long. - Remove all hashtags "},
                     {"role": "user", "content": "This is the last attempt to shorten the content. Remember no longer than 265 characters. "},
-                    {"role": "user", "content": "Don't mention fans, you're just making a funny opinion."},
+                    {"role": "user", "content": "Don't mention fans, you're just making a funny opinion. Keep @ handles in the content. "},
+                    {"role": "user", "content": self.date_info},
                     {"role": "user", "content": fact},
                 ]
             )
