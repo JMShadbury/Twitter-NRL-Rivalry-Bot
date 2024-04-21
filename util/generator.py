@@ -128,12 +128,11 @@ class FactGenerator:
                 model="gpt-4",
                 messages=[
                     {"role": "system", "content": self.system_prompt},
-                    {"role": "user", "content": self.team_stats_prompt},
                     {"role": "user", "content": self.legend_prompt},
                     {"role": "user", "content": self.game_prompt},
                     {"role": "user", "content": Messages.REMINDER.value},
                     {"role": "user", "content": self.date_info},
-                    {"role": "user", "content": "Never mention Tackles as a stat, content should be humerous."},
+                    {"role": "user", "content": "Content should be funny. "},
                     {"role": "user", "content": self.score_info}
                 ]
             )
@@ -158,7 +157,7 @@ class FactGenerator:
                 messages=[
                     {"role": "system", "content": "This needs to be less than 265 characters long. - Remove all hashtags "},
                     {"role": "user", "content": "This is the last attempt to shorten the content. Remember no longer than 265 characters. "},
-                    {"role": "user", "content": "Don't mention fans, you're just making a funny opinion. Keep @ handles in the content. "},
+                    {"role": "user", "content": "Don't mention fans, you're just making a funny tweet about the game. Keep @ handles in the content. "},
                     {"role": "user", "content": self.date_info},
                     {"role": "user", "content": fact},
                 ]
