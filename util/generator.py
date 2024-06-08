@@ -154,7 +154,7 @@ class FactGenerator:
                     {"role": "user", "content": "Ensure you keep the @ handles in the content. We add content on, which is why its 265. "},
                     {"role": "user", "content": self.legend_prompt},
                     {"role": "user", "content": self.date_info},
-                    {"role": "user", "content": Messages.REMINDER.value}
+                    {"role": "user", "content": Messages.REMINDER.value},
                     {"role": "user", "content": fact}
                 ]
             )
