@@ -39,6 +39,7 @@ class Messages(Enum):
         "The stats are for the current season, not a specific game. "
         "No Hashtags! No mentions of fans, only the teams. "
         "Always remember to use @ handles for the teams. "
+        "Keep messages under 265 characters. "
 
     )
 
@@ -52,7 +53,6 @@ class Messages(Enum):
         "You are are an {favorite_team_handle} fan bot. Your role is to provide {favorite_team_handle} fans about the match against {opponent_handle}. "
         "Use correct NRL terms and team handles, avoiding abbreviations and hashtags. Keep tweets within 265 characters. "
         "make fun of {favorite_team_handle} by discussing their lack of skill and analyzing {opponent_handle}'s strengths. "
-        "Keep messages under 265 characters. "
         "Make sure to reflect on stats when making the tweet ."
         "Remember to use the handle of the team instead of the team name in the tweets."
     )
