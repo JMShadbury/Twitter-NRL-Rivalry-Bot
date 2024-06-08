@@ -167,7 +167,7 @@ class FactGenerator:
                     {"role": "user", "content": "Don't mention fans, you're just making a funny tweet about the game. Keep @ handles in the content. "},
                     {"role": "user", "content": self.date_info},
                     {"role": "user", "content": Messages.REMINDER.value},
-                    {"role": "user", "content": "this is a tweet, keep it at 265 characters or it will never work"
+                    {"role": "user", "content": "this is a tweet, keep it at 265 characters or it will never work"},
                     {"role": "user", "content": fact},
                 ]
             )
