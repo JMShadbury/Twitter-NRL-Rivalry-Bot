@@ -154,6 +154,7 @@ class FactGenerator:
                     {"role": "user", "content": "Ensure you keep the @ handles in the content. We add content on, which is why its 265. "},
                     {"role": "user", "content": self.legend_prompt},
                     {"role": "user", "content": self.date_info},
+                    {"role": "user", "content": Messages.REMINDER.value}
                     {"role": "user", "content": fact}
                 ]
             )
@@ -165,6 +166,7 @@ class FactGenerator:
                     {"role": "user", "content": "This is the last attempt to shorten the content. Remember no longer than 265 characters. "},
                     {"role": "user", "content": "Don't mention fans, you're just making a funny tweet about the game. Keep @ handles in the content. "},
                     {"role": "user", "content": self.date_info},
+                    {"role": "user", "content": Messages.REMINDER.value},
                     {"role": "user", "content": fact},
                 ]
             )
