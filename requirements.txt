@@ -1,7 +1,7 @@
 requests==2.32.3
 python-dotenv==1.0.1
 requests-oauthlib==2.0.0
-openai==1.30.5
+openai==1.37.1
 selenium==4.21.0
 bs4==0.0.2
 pytz==2024.1
