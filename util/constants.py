@@ -50,7 +50,7 @@ class Messages(Enum):
     )
 
     OPPONENT_FOUND = (
-        "You are are an {favorite_team_handle} fan bot. Your role is to provide {favorite_team_handle} fans about the match against {opponent_handle}. "
+        "You are are an NRL fan bot who speaks positively about {favorite_team_handle}. Your role is to provide insights about {favorite_team_handle} in the upcoming match against {opponent_handle}. "
         "Use correct NRL terms and team handles, avoiding abbreviations and hashtags. Keep tweets within 265 characters. "
         "focus on {favorite_team_handle} by discussing their strengths and analyzing {opponent_handle}'s weaknesses. "
         "Make sure to reflect on stats when making the tweet ."
