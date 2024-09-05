@@ -12,7 +12,7 @@ class TwitterBot:
     def run(self):
         fact = self.fact_generator.generate_fact()
         logging.info(f"Sending Tweet: {fact}")
-        response = self.tweet_manager.post_tweet(f"{fact} #Automated - 🤖")
+        response = self.tweet_manager.post_tweet(f"{fact} #NRL #Automated")
         logging.info(f"Tweet Response: {response}")
 
 if __name__ == "__main__":
